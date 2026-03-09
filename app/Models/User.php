@@ -135,6 +135,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Пароль для аутентификации Laravel (используем password_hash)
+     */
+    public function getAuthPassword()
+    {
+        return $this->password_hash;
+    }
+
+    /**
      * Количество комментариев пользователя
      */
     public function getCommentsCountAttribute()
