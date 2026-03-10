@@ -13,18 +13,15 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            if (!Auth::user() || !Auth::user()->isAdmin()) {
-                abort(403);
-            }
-
-            return $next($request);
-        });
+      $this->middleware('auth');
+ 
     }
 
     public function dashboard()
     {
+        if (!Auth::user() || !Auth::user()->isAdmin()) {
+                abort(403);
+            }
         return view('admin.dashboard', [
             'moviesCount' => Movie::count(),
             'usersCount' => User::count(),
